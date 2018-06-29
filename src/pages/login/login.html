@@ -6,23 +6,23 @@
     </ion-navbar>
 </ion-header>
 <ion-content padding id="page6">
-    <form id="login-form5">
+    <form [formGroup]="loginForm" id="login-form5" (ngSubmit)="submitLoginForm()">
         <ion-list id="login-list4">
             <ion-item id="login-input7">
                 <ion-label>
                     Email
                 </ion-label>
-                <ion-input type="email" placeholder=""></ion-input>
+                <ion-input type="email" formControlName="emailFld" placeholder="email@example.com"></ion-input>
             </ion-item>
             <ion-item id="login-input8">
                 <ion-label>
                     Password
                 </ion-label>
-                <ion-input type="password" placeholder=""></ion-input>
+                <ion-input type="password" formControlName="passwordFld" placeholder=""></ion-input>
             </ion-item>
         </ion-list>
         <div class="spacer" style="height:40px;" id="login-spacer1"></div>
-        <button id="login-button3" ion-button color="dark" block on-click="goToTabsControllerPages()">
+        <button id="login-button3" ion-button color="dark" block type="submit">
           Log in
         </button>
         <button id="login-button4" ion-button clear color="dark" block on-click="goToSignUp()">
