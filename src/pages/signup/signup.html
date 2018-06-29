@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Signup
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding id="page5">
+    <form [formGroup]="signupForm" id="signup-form4" (ngSubmit)="submitSignUpForm()">
+        <ion-list id="signup-list3">
+            <ion-item id="signup-input4">
+                <ion-label>
+                    Username
+                </ion-label>
+                <ion-input type="text" formControlName="usernameFld" placeholder="username"></ion-input>
+            </ion-item>
+            <ion-item id="signup-input5">
+                <ion-label>
+                    Email
+                </ion-label>
+                <ion-input type="email" formControlName="emailFld" placeholder=""></ion-input>
+            </ion-item>
+            <ion-item id="signup-input6">
+                <ion-label>
+                    Senha
+                </ion-label>
+                <ion-input type="password" formControlName="passwordFld" placeholder=""></ion-input>
+            </ion-item>
+        </ion-list>
+        <button id="signup-button2" ion-button color="dark" block type="submit">
+      Cadastrar
+    </button>
+    </form>
+</ion-content>

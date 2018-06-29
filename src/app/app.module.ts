@@ -1,16 +1,30 @@
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
-
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { PostarJogoPage } from '../pages/postar-jogo/postar-jogo';
+import { TrocarJogoPage } from '../pages/trocar-jogo/trocar-jogo';
+import { InteressadosPage } from '../pages/interessados/interessados';
+import { TabsControllerPage } from '../pages/tabs-controller/tabs-controller';
+import { SignupPage } from '../pages/signup/signup';
+import { LoginPage } from '../pages/login/login';
+import { ProfilePage } from '../pages/profile/profile';
+
+
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { AuthProvider } from '../providers/auth/auth';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    PostarJogoPage,
+    TrocarJogoPage,
+    InteressadosPage,
+    TabsControllerPage,
+    SignupPage,
+    LoginPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -19,12 +33,19 @@ import { HomePage } from '../pages/home/home';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    PostarJogoPage,
+    TrocarJogoPage,
+    InteressadosPage,
+    TabsControllerPage,
+    SignupPage,
+    LoginPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthProvider
   ]
 })
 export class AppModule {}
