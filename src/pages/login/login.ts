@@ -31,26 +31,29 @@ export class LoginPage {
   async submitLoginForm(): Promise<void>{
     if(!this.loginForm.valid){
       console.log('não é valido');
+      return;
     }
-    
-    this.loading.present();
-    try {
-      const loggedUser = await this.auth.loginUser(this.loginForm.value.emailFld, this.loginForm.value.passwordFld);
-      
-      await this.loading.dismiss();
-      this.navCtrl.setRoot(TabsControllerPage);
-    
-    } catch (error) {
-      await this.loading.dismiss();
+    this.auth.loginUser(this.loginForm.value.emailFld, this.loginForm.value.passwordFld)
+    .then((lgUser) => {
+      console.log('usuario loggado 1');
+      console.log(lgUser);
+
+        console.log('fez o dismiss()');
+        this.navCtrl.setRoot(TabsControllerPage);
+
+    })
+    .catch((rejected) => {
+      console.log('erro no loggin 1');
+
         const alert = this.alertCtrl.create({
-                                    message: error.message,
+                                    message: rejected.message,
                                     buttons: [{
                                       text: 'ok',
                                       role: 'cancel'}]
                                   });
         alert.present();
-      console.log(error);
-    }
+      console.log(rejected);
+    });  
   }
   goToSignUp(){
     this.navCtrl.push(SignupPage);

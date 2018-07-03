@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
-
+import { v4 as uuid } from 'uuid';
 /*
   Generated class for the AuthProvider provider.
 
@@ -33,7 +33,6 @@ export class AuthProvider {
     return new Promise((resolve, reject)=>{
       firebase.auth().signOut()
         .then(() =>{
-          const loggedOut = true;
           resolve(true);
         })
         .catch((error: any) => {
@@ -41,4 +40,24 @@ export class AuthProvider {
         })
     });
   }
+
+  async publishGameOffer(gameOffer: any): Promise<any> {
+    try{
+      const offerUuid = uuid();
+      const publishableGameOffer = gameOffer;
+      publishableGameOffer.status = 'open';
+      publishableGameOffer.userID = firebase.auth().currentUser.uid;
+      return await firebase.database()
+        .ref(`/offeredGames/${offerUuid}`).set(publishableGameOffer)
+        .then( done => {
+          console.log('publishGameOffer, Then(done): ');
+          console.log(done);
+        });
+      
+    }catch(error) {
+      console.log('lancei erro dentro da funcao');
+      throw error;
+    }
+  }
+
 }

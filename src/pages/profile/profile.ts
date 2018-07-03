@@ -14,10 +14,12 @@ export class ProfilePage {
               private auth: AuthProvider) {
   }
   logout(): void{
-    this.auth.logoutUser().then((isLoggedOut) =>{
+    this.auth.logoutUser().then(() =>{
+      console.log('logout: sucesso');
       this.app.getRootNav().setRoot(LoginPage);
     })
     .catch((error) =>{
+      console.log('logout error: ');
       console.log(error);
     });
   }

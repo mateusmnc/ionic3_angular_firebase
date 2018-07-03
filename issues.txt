@@ -1,3 +1,15 @@
+Prioritize
+- button to take picture instead of Publicar jogo
+- Image is rotating after the picture is taken
+- get from gallery
+- Loading indicator was removed when logging in 
+- valor de platform no gameOffer tem quebras de linha, mó zuado, arruma.
+- mudar storage da image do database para o storage (referencia https://www.youtube.com/watch?v=urFpUVjLw0Y)
+- criar uma classe pra gerenciar o banco separado da autenticacao
+- trocar para observables as chamas (requer pesquisa)
+
+
+
 <ion-header>
     <ion-navbar>
         <ion-buttons start>
@@ -41,7 +53,7 @@
             </ion-label>
             <ion-input type="text" placeholder="" formControlName="place"></ion-input>
         </ion-item>
-        <button id="postarJogo-button1" ion-button color="dark" block type="submit">
+        <button id="postarJogo-button1" ion-button color="dark" block>
         Publicar jogo
       </button>
     </form>

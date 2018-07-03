@@ -14,7 +14,8 @@ import { ProfilePage } from '../pages/profile/profile';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
-
+import { Camera } from '@ionic-native/camera';
+import { DataExchangerProvider } from '../providers/data-exchanger/data-exchanger';
 @NgModule({
   declarations: [
     MyApp,
@@ -45,7 +46,9 @@ import { AuthProvider } from '../providers/auth/auth';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider
+    AuthProvider,
+    Camera,
+    DataExchangerProvider
   ]
 })
 export class AppModule {}
