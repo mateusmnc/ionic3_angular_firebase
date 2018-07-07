@@ -16,6 +16,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
 import { Camera } from '@ionic-native/camera';
 import { DataExchangerProvider } from '../providers/data-exchanger/data-exchanger';
+import { FIREBASE_CONFIG } from './firebase.config';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 @NgModule({
   declarations: [
     MyApp,
@@ -29,7 +33,10 @@ import { DataExchangerProvider } from '../providers/data-exchanger/data-exchange
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -47,8 +54,9 @@ import { DataExchangerProvider } from '../providers/data-exchanger/data-exchange
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
+    DataExchangerProvider,
     Camera,
-    DataExchangerProvider
+    AngularFireDatabase
   ]
 })
 export class AppModule {}

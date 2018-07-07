@@ -1,3 +1,10 @@
+Basic Backlog
+- Ler dados de uma vez
+- Postar proposta
+- Ler dados na mudança
+- ler dados de proposta na mudança
+
+
 Prioritize
 - button to take picture instead of Publicar jogo
 - Image is rotating after the picture is taken
