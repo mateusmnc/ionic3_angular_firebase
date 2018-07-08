@@ -9,14 +9,16 @@ import { v4 as uuid } from 'uuid';
 */
 @Injectable()
 export class AuthProvider {
-  
+  private userID;
   constructor() {}
   
   async signUpUser(username: string, email:string, password:string): Promise<any> {
     try{
       const newUser = await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password);
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+      
+      this.setUserID(newUser.user.uid);
       await firebase.database().ref(`/userProfile/${newUser.user.uid}`).set({email: email, username: username});
       
       return newUser;
@@ -25,7 +27,16 @@ export class AuthProvider {
     }
   }
   
+  setUserID(userID){
+    this.userID = userID;
+  }
+
+  getUserID(){
+    return this.userID;
+  }
+
   async loginUser(email: string, password: string): Promise<any> {
+    
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
 

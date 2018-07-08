@@ -11,6 +11,7 @@ import firebase from 'firebase';
 import {Unsubscribe} from '@firebase/util';
 import { FIREBASE_CONFIG } from './firebase.config';
 import { TabsControllerPage } from '../pages/tabs-controller/tabs-controller';
+import { AuthProvider } from '../providers/auth/auth';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,12 +22,13 @@ export class MyApp {
   // rootPage:any = LoginPage;
   rootPage:any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private auth: AuthProvider) {
     
     firebase.initializeApp(FIREBASE_CONFIG);
 
     const unsubscribe:Unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if(user){
+        this.auth.setUserID(user.uid);
         this.rootPage = TabsControllerPage;
         unsubscribe();
       }else{

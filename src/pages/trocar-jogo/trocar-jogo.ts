@@ -23,5 +23,11 @@ export class TrocarJogoPage {
   manifestInterest(offerID: string, proposal){
     console.log('offerID:' + offerID);
     console.log('proposal' + proposal);
+    if(proposal === ""){
+      console.log('please enter a proposal');
+      return;      
+    }
+
+    this.dataExchanger.manifestInterest(offerID, proposal);
   }
 }
