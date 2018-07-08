@@ -1,23 +1,36 @@
 import { Injectable } from '@angular/core';
-
-// import { v4 as uuid } from 'uuid';
-/*
-  Generated class for the DataExchangerProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
+import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase } from 'angularfire2/database';
+import firebase from 'firebase';
+import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class DataExchangerProvider {
   
-  constructor() {}
+  constructor(private angularFireDB: AngularFireDatabase) {}
   
-  // async loadOffers(updateOffers) {
-  //   try {
-  //     //await firebase.database().ref(`/offeredGames/`).on('value', updateOffers);
-  //   } catch (error) {
-  //     throw error;
-  //   }   
-  // }
+  getOfferedGames(): Observable<{}[]> {
+    return this.angularFireDB.list('offeredGames').valueChanges();
+  }
+
+  async publishGameOffer(gameOffer: any): Promise<any> {
+    try{
+      const offerUuid = uuid();
+      const publishableGameOffer = gameOffer;
+      publishableGameOffer.status = 'open';
+      publishableGameOffer.userID = firebase.auth().currentUser.uid;
+      publishableGameOffer.offerID = offerUuid;
+      return await firebase.database()
+        .ref(`/offeredGames/${offerUuid}`).set(publishableGameOffer)
+        .then( done => {
+          console.log('publishGameOffer, Then(done): ');
+          console.log(done);
+        });
+      
+    }catch(error) {
+      console.log('lancei erro dentro da funcao');
+      throw error;
+    }
+  }
+
 }

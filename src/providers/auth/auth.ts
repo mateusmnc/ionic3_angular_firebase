@@ -47,6 +47,7 @@ export class AuthProvider {
       const publishableGameOffer = gameOffer;
       publishableGameOffer.status = 'open';
       publishableGameOffer.userID = firebase.auth().currentUser.uid;
+      publishableGameOffer.offerID = offerUuid;
       return await firebase.database()
         .ref(`/offeredGames/${offerUuid}`).set(publishableGameOffer)
         .then( done => {

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthProvider } from '../../providers/auth/auth';
+import { DataExchangerProvider } from '../../providers/data-exchanger/data-exchanger';
 
 @Component({
   selector: 'page-postar-jogo',
@@ -10,13 +10,11 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 
 export class PostarJogoPage {
-  // this tells the tabs component which Pages
-  // should be each tab's root Page
   public myGameForm: FormGroup;
   public gameImage:any = '/assets/img/jcXeeNUSjChM4b9PJ2Hg_placeholder.png';
 
   constructor(public navCtrl: NavController,
-              public auth: AuthProvider, 
+              private dataExchanger: DataExchangerProvider,
               private camera: Camera,
               private formBuilder:FormBuilder ) {
                 
@@ -45,18 +43,21 @@ export class PostarJogoPage {
   publishGameOffer(){
     if(!this.myGameForm.valid){
       console.log('nao é valido');
+      return;
     }
     if(this.gameImage === '/assets/img/jcXeeNUSjChM4b9PJ2Hg_placeholder.png'){
       console.log('tire uma foto do seu jogo');
+      return;
     }
     console.log(this.myGameForm);
     this.myGameForm.value.gameImage = this.gameImage;
-    this.auth
+    this.dataExchanger
       .publishGameOffer(this.myGameForm.value)
       .then(
         (post) => {
           console.log('post sent, return in the promisse: ');
           console.log(post);
+          this.navCtrl.parent.select(1);
         },
         (error) => {
           console.log('deu error');

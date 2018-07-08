@@ -7,33 +7,33 @@
 </ion-header>
 <ion-content padding id="page3">
     <ion-list id="trocarJogo-list1">
-        <!-- <div *ngFor="let offer of offers | async"> -->
-        <ion-item color="dark" *ngFor="let offer of offers | async">
-            <!-- <ion-item color="dark" id="trocarJogo-list-item5"> -->
-            <!-- {{ offer | json }} -->
-            <ion-thumbnail item-left>
-                <img src="{{offer?.gameImage}}" />
-            </ion-thumbnail>
-            <!--    <h2>
-                    {{offer.gameName}}
-                </h2>
+        <div *ngFor="let offer of offers | async; let i = index">
+            <ion-item color="dark">
+                <ion-thumbnail item-left>
+                    <img src="{{offer?.gameImage}}" />
+                </ion-thumbnail>
+                <h2>{{offer.gameName}}</h2>
             </ion-item>
-            <ion-item color="dark" id="trocarJogo-list-item6">
+            <ion-item color="dark">
                 {{offer.platform}}
-                <ion-icon name="pin" item-right></ion-icon>
+                <ion-icon name="game-controller-b" item-right></ion-icon>
             </ion-item>
-            <ion-item color="dark" id="trocarJogo-list-item7">
+            <ion-item color="dark">
                 {{offer.place}}
                 <ion-icon name="pin" item-right></ion-icon>
             </ion-item>
-            <ion-item id="trocarJogo-select2">
-                <ion-label>
-                    Troco por
+            <ion-item color="dark">
+                <ion-label color="light">
+                    Proposta
                 </ion-label>
-                <ion-select name="">
-                    <ion-option></ion-option>
-                </ion-select> -->
-        </ion-item>
-        <!-- </div> -->
+                <ion-input type="text" color="dark" [(ngModel)]="proposals[i]" placeholder=""></ion-input>
+            </ion-item>
+            <ion-item color="dark">
+                <button id="wanted-button" ion-button color="light" block (click)="manifestInterest(offer.offerID, proposals[i])">
+                    Tenho interesse!
+                </button>
+            </ion-item>
+            <div class="mb-5"></div>
+        </div>
     </ion-list>
 </ion-content>
