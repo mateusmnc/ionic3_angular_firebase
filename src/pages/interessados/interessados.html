@@ -1,22 +1,41 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Interessados
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>
+            Interessados
+        </ion-title>
+    </ion-navbar>
 </ion-header>
 <ion-content padding id="page4">
-  <ion-list id="interessados-list2">
-    <ion-item color="none" id="interessados-list-item10">
-      <ion-thumbnail item-left>
-        <img />
-      </ion-thumbnail>
-      <h2>
-        username
-      </h2>
-    </ion-item>
-    <ion-item color="none" id="interessados-list-item11">
-      Troco por:
-    </ion-item>
-  </ion-list>
+    <ion-list id="interessados-list2">
+        <div *ngFor="let deal of deals | async; let i = index">
+            <ion-item color="none">
+                <ion-thumbnail item-left>
+                    <img src="{{deal?.gameImage}}" />
+                </ion-thumbnail>
+                <h2>
+                    {{deal.gameName}}
+                </h2>
+            </ion-item>
+            <ion-list>
+                <div *ngFor="let prop of proposals[i]; let idx = index">
+                    <!-- {{proposal.proposal}} -->
+                    <h5>Proposta {{idx + 1}}</h5>
+                    <ion-item color="none">
+                        <ion-label color="primary" stacked>Josias diz:</ion-label>
+                        <ion-label type="text">{{prop.proposal}}</ion-label>
+                    </ion-item>
+                    <ion-item>
+                        <ion-row>
+                            <ion-col col-6>
+                                <button ion-button small block color="light" (click)="acceptedProposal(i,idx)">Aceitar</button>
+                            </ion-col>
+                            <ion-col col-6>
+                                <button ion-button small block color="light" (click)="declinedProposal(i, idx)">Declinar</button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-item>
+                </div>
+            </ion-list>
+        </div>
+    </ion-list>
 </ion-content>

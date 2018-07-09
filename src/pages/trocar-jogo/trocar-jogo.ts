@@ -16,7 +16,7 @@ export class TrocarJogoPage {
   constructor(public navCtrl: NavController, 
               public dataExchanger: DataExchangerProvider) {
 
-    this.offers = dataExchanger.getOfferedGames();
+    this.offers = this.dataExchanger.getOfferedGames();
     this.offers.subscribe(x =>console.log(x));
   }
 
